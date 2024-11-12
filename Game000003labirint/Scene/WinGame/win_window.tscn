@@ -1,0 +1,127 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7iyc6wvlamf4"]
+
+[ext_resource type="Script" path="res://Scene/WinGame/win_window.gd" id="1_kw7be"]
+[ext_resource type="Texture2D" uid="uid://dvq55td7aaftt" path="res://assets/Untitled 03-01-2024 05-13-18.png" id="2_cffwy"]
+[ext_resource type="Texture2D" uid="uid://covhtvjiv7hgw" path="res://assets/Kolobok003.png" id="3_udw5x"]
+[ext_resource type="Texture2D" uid="uid://cud03sm8ho2gg" path="res://assets/Kolobok002.png" id="4_mga4e"]
+[ext_resource type="Texture2D" uid="uid://dsxckg4mt7mpo" path="res://assets/Kolobok001.png" id="5_b2t1l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ocxrt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_udw5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mga4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b2t1l")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 3.0
+}]
+
+[node name="WinWindow" type="Node2D"]
+script = ExtResource("1_kw7be")
+metadata/_edit_vertical_guides_ = [1281.0]
+
+[node name="Untitled03-01-202405-13-18" type="Sprite2D" parent="."]
+position = Vector2(646, 360.5)
+scale = Vector2(1.26172, 1.03194)
+texture = ExtResource("2_cffwy")
+
+[node name="lblYW" type="Label" parent="."]
+offset_left = 287.0
+offset_top = 123.0
+offset_right = 998.0
+offset_bottom = 225.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 72
+text = "Добро пожаловать"
+justification_flags = 161
+
+[node name="lblYW2" type="Label" parent="."]
+offset_left = 283.0
+offset_top = 18.0
+offset_right = 994.0
+offset_bottom = 120.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 72
+text = "Лабиринт"
+horizontal_alignment = 1
+justification_flags = 161
+
+[node name="btnRestart" type="Button" parent="."]
+offset_left = 215.0
+offset_top = 639.0
+offset_right = 311.0
+offset_bottom = 670.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "УРОВЕНЬ 1"
+
+[node name="btnLevel2" type="Button" parent="."]
+offset_left = 365.0
+offset_top = 639.0
+offset_right = 461.0
+offset_bottom = 670.0
+text = "УРОВЕНЬ 2"
+
+[node name="btnLevel3" type="Button" parent="."]
+offset_left = 515.0
+offset_top = 639.0
+offset_right = 611.0
+offset_bottom = 670.0
+text = "УРОВЕНЬ 3"
+
+[node name="btnLevel4" type="Button" parent="."]
+offset_left = 665.0
+offset_top = 639.0
+offset_right = 761.0
+offset_bottom = 670.0
+text = "УРОВЕНЬ 4"
+
+[node name="btnLevel5" type="Button" parent="."]
+offset_left = 815.0
+offset_top = 639.0
+offset_right = 911.0
+offset_bottom = 670.0
+text = "УРОВЕНЬ 5"
+
+[node name="btnLevel6" type="Button" parent="."]
+offset_left = 965.0
+offset_top = 639.0
+offset_right = 1061.0
+offset_bottom = 670.0
+text = "УРОВЕНЬ 6"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 489.0
+offset_top = 246.0
+offset_right = 819.0
+offset_bottom = 272.0
+text = "Последнее время прохождения: "
+
+[node name="LabelLastLevelName" type="Label" parent="."]
+offset_left = 490.0
+offset_top = 281.0
+offset_right = 769.0
+offset_bottom = 307.0
+text = "Последний пройденный уровень: "
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(166, 340)
+scale = Vector2(5.375, 4.84375)
+sprite_frames = SubResource("SpriteFrames_ocxrt")
+animation = &"Idle"
+autoplay = "Idle"
+
+[connection signal="pressed" from="btnRestart" to="." method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="btnLevel2" to="." method="_on_btn_level_2_pressed"]
+[connection signal="pressed" from="btnLevel3" to="." method="_on_btn_level_3_pressed"]
+[connection signal="pressed" from="btnLevel4" to="." method="_on_btn_level_4_pressed"]
+[connection signal="pressed" from="btnLevel5" to="." method="_on_btn_level_5_pressed"]
+[connection signal="pressed" from="btnLevel6" to="." method="_on_btn_level_6_pressed"]
