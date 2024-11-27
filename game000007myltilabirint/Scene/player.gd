@@ -1,41 +1,38 @@
 extends CharacterBody2D
 
+class_name Player
 
 const SPEED = 200.0
-const JUMP_VELOCITY = -360.0
+const JUMP_VELOCITY = -300.0
 
+@export var state_machine: PlayerStateMachine
+var current_speed: float = SPEED # Переменная для текущей скорости
 
-@onready var sprite_2d_2 = $AnimatedSprite2D
+@onready var sprite = $AnimatedSprite2D
+@onready var cShapeIdle = $csIdle
+@onready var cShapeCrouch = $csCrunch
 
-func ready():
-	sprite_2d_2.play("Idle")
+func _ready():
+	state_machine = $PlayerStateMachine
 
-func _physics_process(delta: float) -> void:
-	
-	# Add the gravity.
+func _process(delta):
+	state_machine._process(delta)
+
+func _physics_process(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("move_left", "move_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
-	if (direction == -1):
-		sprite_2d_2.play("Run")
-		sprite_2d_2.flip_h = true
-	elif (direction == 1):
-		sprite_2d_2.play("Run")
-		sprite_2d_2.flip_h = false
-	else:
-		sprite_2d_2.play("Idle")
-	
-
 	move_and_slide()
+
+	state_machine._physics_process(delta)
+
+func _unhandled_input(event):
+	state_machine._unhandled_input(event)
+
+# Переносим метод change_direction внутрь класса Player
+func change_direction(dir):
+	velocity.x = dir * current_speed
+	if dir < 0:
+		sprite.flip_h = true
+	elif dir > 0:
+		sprite.flip_h = false
