@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Player
 
 const SPEED = 200.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -350.0
 
 @export var state_machine: PlayerStateMachine
 var current_speed: float = SPEED # Переменная для текущей скорости
@@ -33,6 +33,10 @@ func _unhandled_input(event):
 func change_direction(dir):
 	velocity.x = dir * current_speed
 	if dir < 0:
+		if sprite.flip_h == false:
+			sprite.position.x -= 8
 		sprite.flip_h = true
 	elif dir > 0:
+		if sprite.flip_h == true:
+			sprite.position.x += 8
 		sprite.flip_h = false
